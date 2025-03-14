@@ -1,0 +1,102 @@
+[
+  {
+    "id_produk": "OBR-001",
+    "nama_produk": "Paracetamol 500mg",
+    "harga": 10000,
+    "stok": 120,
+    "kategori_id": 2,
+    "status_id": 1,
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  },
+  {
+    "id_produk": "OBR-002",
+    "nama_produk": "Amoxicillin 500mg",
+    "harga": 25000,
+    "stok": 85,
+    "kategori_id": 1,
+    "status_id": 1,
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  },
+  {
+    "id_produk": "OBR-003",
+    "nama_produk": "Cetirizine 10mg",
+    "harga": 15000,
+    "stok": 65,
+    "kategori_id": 2,
+    "status_id": 1,
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  },
+  {
+    "id_produk": "OBR-004",
+    "nama_produk": "Vitamin C 1000mg",
+    "harga": 30000,
+    "stok": 150,
+    "kategori_id": 2,
+    "status_id": 1,
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  },
+  {
+    "id_produk": "OBR-005",
+    "nama_produk": "Omeprazole 20mg",
+    "harga": 32000,
+    "stok": 0,
+    "kategori_id": 1,
+    "status_id": 2,
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  },
+  {
+    "id_produk": "ALK-001",
+    "nama_produk": "Masker Medis (50 pcs)",
+    "harga": 50000,
+    "stok": 200,
+    "kategori_id": 3,
+    "status_id": 1,
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  },
+  {
+    "id_produk": "ALK-002",
+    "nama_produk": "Termometer Digital",
+    "harga": 85000,
+    "stok": 35,
+    "kategori_id": 3,
+    "status_id": 1,
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  },
+  {
+    "id_produk": "OBR-006",
+    "nama_produk": "Simvastatin 10mg",
+    "harga": 28000,
+    "stok": 0,
+    "kategori_id": 1,
+    "status_id": 2,
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  },
+  {
+    "id_produk": "ALK-003",
+    "nama_produk": "Tensimeter Digital",
+    "harga": 350000,
+    "stok": 15,
+    "kategori_id": 3,
+    "status_id": 1,
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  },
+  {
+    "id_produk": "OBR-007",
+    "nama_produk": "Loratadine 10mg",
+    "harga": 18000,
+    "stok": 75,
+    "kategori_id": 2,
+    "status_id": 1,
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  }
+]

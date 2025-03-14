@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Obat Resep",
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  },
+  {
+    "name": "Obat Bebas",
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  },
+  {
+    "name": "Alat Kesehatan",
+    "createdAt": "2025-03-14T00:00:00.000Z",
+    "updatedAt": "2025-03-14T00:00:00.000Z"
+  }
+]
