@@ -1,5 +1,5 @@
 const { comparePass } = require("../helpers/bcrypt");
-const { User } = require("../models");
+const { User, sequelize } = require("../models");
 const { signToken } = require("../helpers/jwt"); // Asumsi ini ada di project Anda
 
 async function register(req, res, next) {
@@ -95,7 +95,7 @@ async function getTopCustomers(req, res, next) {
         "Users" ON "Orders".user_id = "Users".id
       WHERE 
         "Orders"."createdAt" >= NOW() - INTERVAL '${period}'
-        AND "Orders".status = 'success'
+        AND "Orders".status = 'completed'
       GROUP BY 
         "Orders".user_id, "Users".username, "Users".email
       ORDER BY 
