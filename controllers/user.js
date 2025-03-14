@@ -1,9 +1,19 @@
-import { comparePass } from "../helpers/bcrypt";
-const { User } = require("../models/user");
+const { comparePass } = require("../helpers/bcrypt");
+const { User } = require("../models");
+const { signToken } = require("../helpers/jwt"); // Asumsi ini ada di project Anda
 
-export async function register(req, res, next) {
+async function register(req, res, next) {
   try {
     const { username, email, password } = req.body;
+
+    // Tambahkan validasi menggunakan Zod
+    const validation = User.validateUser({ username, email, password });
+    if (!validation.success) {
+      return res.status(400).json({
+        message: "Validation failed",
+        errors: validation.error.errors,
+      });
+    }
 
     const newUser = await User.create({ username, email, password });
     res.status(201).json({ id: newUser.id, email: newUser.email });
@@ -12,7 +22,7 @@ export async function register(req, res, next) {
   }
 }
 
-export async function login(req, res, next) {
+async function login(req, res, next) {
   try {
     const { email, password } = req.body;
 
@@ -30,6 +40,10 @@ export async function login(req, res, next) {
       throw { name: "unauthentication" };
     }
 
+    // console.log(user);
+    // console.log("ini dari postman", password);
+    // console.log("ini dari db", user.password);
+
     const isPasswordMatch = comparePass(password, user.password);
 
     if (!isPasswordMatch) {
@@ -43,3 +57,8 @@ export async function login(req, res, next) {
     next(error);
   }
 }
+
+module.exports = {
+  register,
+  login,
+};
