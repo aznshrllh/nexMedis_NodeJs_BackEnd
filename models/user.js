@@ -1,6 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
 const { z } = require("zod");
+const { hashPassword } = require("../helpers/bcrypt");
 
 // Definisikan skema Zod untuk validasi
 const userSchema = z.object({
@@ -57,6 +58,11 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "User",
+      hooks: {
+        beforeCreate: (user, options) => {
+          user.password = hashPassword(user.password);
+        },
+      },
     }
   );
 
