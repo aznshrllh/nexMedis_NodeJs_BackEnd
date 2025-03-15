@@ -2,6 +2,11 @@
 
 Backend API for NexMedis pharmacy management system with Midtrans payment integration.
 
+For the frontend application, please refer to:
+https://github.com/aznshrllh/nexMedis_NodeJs_FE
+
+See the README.md in that repository for frontend setup and usage instructions.
+
 ## Solutions to NexMedis Backend Challenge
 
 ### 1. E-commerce API Design
