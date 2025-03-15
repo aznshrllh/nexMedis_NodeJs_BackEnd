@@ -1,6 +1,6 @@
 const { comparePass } = require("../helpers/bcrypt");
 const { User, sequelize } = require("../models");
-const { signToken } = require("../helpers/jwt"); // Asumsi ini ada di project Anda
+const { signToken } = require("../helpers/jwt");
 
 async function register(req, res, next) {
   try {
