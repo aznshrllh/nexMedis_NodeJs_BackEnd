@@ -36,7 +36,7 @@ async function searchProducts(req, res, next) {
     const products = await Product.findAll({
       where: {
         // Mencari berdasarkan nama produk yang mengandung kata kunci
-        name: {
+        nama_produk: {
           [Op.iLike]: `%${search}%`, // Case insensitive search (untuk PostgreSQL)
         },
       },
