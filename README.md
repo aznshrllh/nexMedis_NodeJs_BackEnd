@@ -2,6 +2,134 @@
 
 Backend API for NexMedis pharmacy management system with Midtrans payment integration.
 
+## Solutions to NexMedis Backend Challenge
+
+### 1. E-commerce API Design
+
+This NexMedis backend implements a comprehensive e-commerce API with:
+
+#### User Registration and Authentication
+
+- **POST /api/register**: Creates a new user account
+- **POST /api/login**: Authenticates a user and returns a JWT
+
+#### Products Management
+
+- **GET /api/products**: Lists all products, with optional search functionality
+- **GET /api/products/:id**: Returns details for a specific product
+- **GET /api/products?search=[keyword]**: Searches products by name
+
+#### Shopping Cart
+
+- **GET /api/carts**: Retrieves user's cart contents
+- **POST /api/carts**: Adds an item to cart
+- **PUT /api/carts/:id**: Updates quantity of a cart item
+- **DELETE /api/carts/:id**: Removes an item from cart
+- **DELETE /api/carts**: Clears the entire cart
+
+#### Purchase Completion
+
+- **POST /api/transactions**: Creates an order from cart items
+- **GET /api/transactions**: Lists user's orders
+- **GET /api/transactions/:id**: Retrieves a specific order
+- **PUT /api/transactions/:id/status**: Updates order status
+
+This API architecture follows RESTful principles with consistent URL structure and HTTP methods. Authentication middleware ensures protected routes are secure.
+
+### 2. Database Indexing Strategy
+
+For the Users table with columns: id, username, email, created_at, we implemented the following indexing strategy:
+
+#### Individual Indexes
+
+- **username**: Created a unique index on username since it's used for exact lookups
+- **email**: Created a unique index on email for authentication and exact lookups
+- **created_at**: Created a non-unique index to optimize date range queries
+
+This approach optimally supports the three query patterns:
+
+- Fetch user by username (exact match)
+- Fetch users who signed up after a certain date (range query)
+- Fetch user by email (exact match)
+
+We chose individual indexes over composite indexes because:
+
+1. Each query only uses one field as filtration criteria
+2. These columns aren't typically queried together in combinations
+3. Individual indexes provide better flexibility for various query patterns
+
+Trade-offs considered:
+
+- Read performance is improved for the specific queries
+- Write performance is slightly decreased due to index maintenance
+- Storage requirements increase to accommodate the indexes
+
+### 3. Top Customers Query Optimization
+
+To find top customers by spending in the past month, we implemented:
+
+```sql
+SELECT
+  "Orders".user_id as customer_id,
+  "Users".username,
+  "Users".email,
+  COUNT("Orders".id) as order_count,
+  SUM("Orders".total) AS total_spent
+FROM
+  "Orders"
+JOIN
+  "Users" ON "Orders".user_id = "Users".id
+WHERE
+  "Orders"."createdAt" >= NOW() - INTERVAL '1 month'
+  AND "Orders".status = 'completed'
+GROUP BY
+  "Orders".user_id, "Users".username, "Users".email
+ORDER BY
+  total_spent DESC
+LIMIT 5
+```
+
+Performance optimizations:
+
+1. We created an index on Orders.user_id for efficient JOIN operations
+2. We added an index on Orders.createdAt to optimize the date range filter
+3. We limited results to only 5 records to minimize data transfer
+4. We included a status filter to only count completed orders
+
+In production, we've implemented:
+
+- Parameters for configurable time periods (e.g., "7 days", "1 month", "1 year")
+- Caching of query results to avoid redundant expensive calculations
+- Partial indexing to focus on recent orders and active customers
+- Database query optimization through EXPLAIN ANALYZE
+
+### 4. Microservice Refactoring Approach
+
+The NexMedis backend demonstrates a well-structured approach to managing distinct business domains:
+
+1. **Authentication Service**: Handles user registration, login and token verification
+2. **Product Service**: Manages product data, searches and inventory
+3. **Cart Service**: Handles shopping cart operations
+4. **Order Service**: Manages order processing and payment integration
+5. **Analytics Service**: Provides business insights like top customer reports
+
+Each service has:
+
+- Well-defined responsibilities with clear boundaries
+- Independent data access patterns
+- Dedicated controllers and models
+- Standardized error handling
+
+Backward compatibility is maintained through:
+
+- API versioning
+- Consistent endpoint structure
+- Authentication middleware that works across services
+- Centralized error handling
+- Comprehensive documentation for all endpoints
+
+This architecture allows independent scaling and maintenance while ensuring a smooth transition from a monolithic approach to a more modular system.
+
 ## Setup Instructions
 
 ### 1. Installation
